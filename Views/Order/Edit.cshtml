@@ -1,0 +1,59 @@
+﻿@using Microsoft.AspNetCore.Mvc.Rendering
+@{
+    ViewData["Title"] = "Edit Order";
+
+    var customerOptions = (IEnumerable<SelectListItem>)(ViewBag.Customers
+                            ?? ViewBag.CustomerList
+                            ?? ViewBag.CustomerOptions
+                            ?? ViewData["Customers"]
+                            ?? Enumerable.Empty<SelectListItem>());
+
+    var productOptions = (IEnumerable<SelectListItem>)(ViewBag.Products
+                            ?? ViewBag.ProductList
+                            ?? ViewBag.ProductOptions
+                            ?? ViewData["Products"]
+                            ?? Enumerable.Empty<SelectListItem>());
+
+    // If your controller put the key into ViewBag.KeyId, pass it back on POST:
+    var keyId = (string?)ViewBag.KeyId;
+}
+
+<h1 class="mb-3">Edit Order</h1>
+
+<form asp-action="Edit" method="post" class="vstack gap-3">
+    @* keep the id stable for POST *@
+    @if (!string.IsNullOrEmpty(keyId))
+    {
+        <input type="hidden" name="id" value="@keyId" />
+    }
+
+    <div class="mb-3">
+        <label class="form-label" for="CustomerId">Customer</label>
+        <select id="CustomerId" name="CustomerId" class="form-select">
+            @foreach (var opt in customerOptions)
+            {
+                <option value="@opt.Value" selected="@(opt.Selected ? "selected" : null)">@opt.Text</option>
+            }
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label" for="ProductId">Product</label>
+        <select id="ProductId" name="ProductId" class="form-select">
+            @foreach (var opt in productOptions)
+            {
+                <option value="@opt.Value" selected="@(opt.Selected ? "selected" : null)">@opt.Text</option>
+            }
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label" for="Quantity">Quantity</label>
+        <input id="Quantity" name="Quantity" type="number" min="1" class="form-control" />
+    </div>
+
+    <div class="d-flex gap-2">
+        <button type="submit" class="btn btn-primary">Save</button>
+        <a asp-action="Index" class="btn btn-secondary">Back</a>
+    </div>
+</form>

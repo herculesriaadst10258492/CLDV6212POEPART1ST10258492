@@ -1,0 +1,11 @@
+﻿@model ABCRetail.Models.Order
+@{
+    ViewData["Title"] = "Delete Order";
+}
+<h2>Delete Order</h2>
+<p>Are you sure you want to delete the order for <strong>@Model.CustomerName</strong> — <em>@Model.ProductName</em>?</p>
+<form asp-action="Delete" method="post">
+    <input type="hidden" name="id" value="@Model.RowKey" />
+    <button type="submit" class="btn btn-danger">Delete</button>
+    <a asp-action="Index" class="btn btn-secondary">Back</a>
+</form>

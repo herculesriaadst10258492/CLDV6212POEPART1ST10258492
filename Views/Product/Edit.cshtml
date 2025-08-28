@@ -1,0 +1,45 @@
+﻿@model ABCRetail.Models.Product
+@{
+    ViewData["Title"] = "Edit Product";
+    var id = (int)ViewBag.KeyId;
+}
+<h1>Edit Product</h1>
+
+<form asp-action="Edit" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="id" value="@id" />
+    <input type="hidden" asp-for="ImageUrl" />
+
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="mb-3">
+        <label asp-for="Name" class="form-label"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Description" class="form-label"></label>
+        <textarea asp-for="Description" class="form-control"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Price" class="form-label"></label>
+        <input asp-for="Price" class="form-control" />
+        <span asp-validation-for="Price" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Replace Image (optional)</label>
+        <input type="file" name="ImageFile" class="form-control" />
+        @if (!string.IsNullOrWhiteSpace(Model.ImageUrl))
+        {
+            <div class="mt-2">
+                <img src="@Model.ImageUrl" alt="image" style="height:80px;width:auto;border-radius:6px;" />
+            </div>
+        }
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a asp-action="Index" class="btn btn-secondary">Back</a>
+</form>

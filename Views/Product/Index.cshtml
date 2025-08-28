@@ -1,0 +1,42 @@
+﻿@model IEnumerable<ABCRetail.Models.Product>
+@{
+    ViewData["Title"] = "Products";
+    var map = (System.Collections.Generic.Dictionary<int, ABCRetail.Models.Product>)ViewBag.ProductMap;
+}
+
+<h1>Products</h1>
+<p><a asp-action="Create" class="btn btn-primary">Create New</a></p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th class="text-end">Price</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var p in Model)
+        {
+            var id = map.First(kv => object.ReferenceEquals(kv.Value, p)).Key;
+            <tr>
+                <td>
+                    @if (!string.IsNullOrWhiteSpace(p.ImageUrl))
+                    {
+                        <img src="@p.ImageUrl" alt="image" style="height:60px;width:auto;border-radius:6px;" />
+                    }
+                </td>
+                <td>@p.Name</td>
+                <td>@p.Description</td>
+                <td class="text-end">@string.Format("{0:C}", p.Price)</td>
+                <td class="text-end">
+                    <a asp-action="Edit" asp-route-id="@id" class="btn btn-sm btn-outline-secondary">Edit</a>
+                    <a asp-action="Details" asp-route-id="@id" class="btn btn-sm btn-outline-info">Details</a>
+                    <a asp-action="Delete" asp-route-id="@id" class="btn btn-sm btn-outline-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

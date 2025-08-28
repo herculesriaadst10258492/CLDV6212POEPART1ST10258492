@@ -1,0 +1,31 @@
+﻿@model IEnumerable<string>
+@{
+    ViewData["Title"] = "Upload";
+}
+<h1>Upload</h1>
+
+<form asp-action="Index" method="post" enctype="multipart/form-data" class="mb-4">
+    <div class="input-group">
+        <input type="file" name="file" class="form-control" />
+        <button type="submit" class="btn btn-primary">Upload</button>
+    </div>
+</form>
+
+@if (Model != null && Model.Any())
+{
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        @foreach (var url in Model)
+        {
+            <div class="col">
+                <div class="card shadow-sm p-2">
+                    <img src="@url" alt="file" style="max-height:180px; width:auto; object-fit:contain;" />
+                    <div class="card-body"><small class="text-muted">@url</small></div>
+                </div>
+            </div>
+        }
+    </div>
+}
+else
+{
+    <p class="text-muted">No files yet. Upload one above.</p>
+}

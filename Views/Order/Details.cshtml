@@ -1,0 +1,21 @@
+﻿@model ABCRetail.Models.Order
+@{
+    ViewData["Title"] = "Order Details";
+}
+<h2>Order Details</h2>
+<dl class="row">
+    <dt class="col-sm-3">Date</dt>
+    <dd class="col-sm-9">@Model.OrderDate</dd>
+    <dt class="col-sm-3">Customer</dt>
+    <dd class="col-sm-9">@Model.CustomerName</dd>
+    <dt class="col-sm-3">Product</dt>
+    <dd class="col-sm-9">@Model.ProductName</dd>
+    <dt class="col-sm-3">Quantity</dt>
+    <dd class="col-sm-9">@Model.Quantity</dd>
+    <dt class="col-sm-3">Status</dt>
+    <dd class="col-sm-9">@Model.Status</dd>
+    <dt class="col-sm-3">Total</dt>
+    <dd class="col-sm-9">@Model.TotalAmount.ToString("C")</dd>
+</dl>
+<a asp-action="Edit" asp-route-id="@Model.RowKey" class="btn btn-primary">Edit</a>
+<a asp-action="Index" class="btn btn-secondary">Back</a>

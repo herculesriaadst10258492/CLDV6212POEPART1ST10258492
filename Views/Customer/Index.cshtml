@@ -1,0 +1,27 @@
+﻿@model IEnumerable<ABCRetail.Models.Customer>
+@{
+    ViewData["Title"] = "Customers";
+}
+<h2 class="mb-3">Customers</h2>
+
+<p><a asp-action="Create" class="btn btn-primary">Add Customer</a></p>
+
+<table class="table table-dark table-striped">
+    <thead>
+        <tr><th>Full Name</th><th>Email</th><th></th></tr>
+    </thead>
+    <tbody>
+        @foreach (var c in Model)
+        {
+            <tr>
+                <td>@c.FullName</td>
+                <td>@c.Email</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@c.RowKey">Details</a> |
+                    <a asp-action="Edit" asp-route-id="@c.RowKey">Edit</a> |
+                    <a asp-action="Delete" asp-route-id="@c.RowKey">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

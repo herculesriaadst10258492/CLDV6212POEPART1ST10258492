@@ -1,0 +1,15 @@
+﻿@model ABCRetail.Models.ErrorViewModel
+@{
+    ViewData["Title"] = "Error";
+}
+<section class="py-5">
+    <div class="card p-5 text-center">
+        <h1 class="display-6">Something went wrong</h1>
+        <p class="text-secondary mt-2">We’re on it. Please try again.</p>
+        @if (Model?.ShowRequestId == true)
+        {
+            <p class="small text-muted mt-3">Request ID: <code>@Model.RequestId</code></p>
+        }
+        <a class="btn btn-light mt-3" asp-controller="Home" asp-action="Index">Go Home</a>
+    </div>
+</section>

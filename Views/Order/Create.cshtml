@@ -1,0 +1,51 @@
+﻿@using Microsoft.AspNetCore.Mvc.Rendering
+@{
+    ViewData["Title"] = "Create Order";
+
+    // Safely pull options from any of the common keys the controller might set
+    var customerOptions = (IEnumerable<SelectListItem>)(ViewBag.Customers
+                            ?? ViewBag.CustomerList
+                            ?? ViewBag.CustomerOptions
+                            ?? ViewData["Customers"]
+                            ?? Enumerable.Empty<SelectListItem>());
+
+    var productOptions = (IEnumerable<SelectListItem>)(ViewBag.Products
+                            ?? ViewBag.ProductList
+                            ?? ViewBag.ProductOptions
+                            ?? ViewData["Products"]
+                            ?? Enumerable.Empty<SelectListItem>());
+}
+
+<h1 class="mb-3">Create Order</h1>
+
+<form asp-action="Create" method="post" class="vstack gap-3">
+    <div class="mb-3">
+        <label class="form-label" for="CustomerId">Customer</label>
+        <select id="CustomerId" name="CustomerId" class="form-select">
+            @foreach (var opt in customerOptions)
+            {
+                <option value="@opt.Value" selected="@(opt.Selected ? "selected" : null)">@opt.Text</option>
+            }
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label" for="ProductId">Product</label>
+        <select id="ProductId" name="ProductId" class="form-select">
+            @foreach (var opt in productOptions)
+            {
+                <option value="@opt.Value" selected="@(opt.Selected ? "selected" : null)">@opt.Text</option>
+            }
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label" for="Quantity">Quantity</label>
+        <input id="Quantity" name="Quantity" type="number" min="1" value="1" class="form-control" />
+    </div>
+
+    <div class="d-flex gap-2">
+        <button type="submit" class="btn btn-primary">Create</button>
+        <a asp-action="Index" class="btn btn-secondary">Back</a>
+    </div>
+</form>

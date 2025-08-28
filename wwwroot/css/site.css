@@ -1,0 +1,255 @@
+/* =========================================
+   ABC Retail - site.css (full)
+   Base defaults (from your project) first,
+   then visual polish at the bottom.
+   ========================================= */
+
+/* ---- base sizing ---- */
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+/* ---- focus rings ---- */
+.btn:focus,
+.btn:active:focus,
+.btn-link.nav-link:focus,
+.form-control:focus,
+.form-check-input:focus {
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+/* ---- sticky footer support ---- */
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+}
+
+/* =========================================================
+   Visual polish
+   ========================================================= */
+
+/* ---- palette ---- */
+:root {
+    --abc-bg: #0f172a; /* page bg (dark blue-slate) */
+    --abc-panel: #111827; /* panels / navbar bg */
+    --abc-text: #e5e7eb; /* body text */
+    --abc-muted: #9ca3af; /* secondary text */
+    --abc-shadow: 0 10px 20px rgba(0,0,0,.15);
+    /* tile colors */
+    --abc-tile-customers: #3b82f6; /* primary */
+    --abc-tile-products: #22c55e; /* success */
+    --abc-tile-orders: #f59e0b; /* warning */
+    --abc-tile-upload: #06b6d4; /* info */
+}
+
+/* ---- page background + typography ---- */
+body {
+    background: var(--abc-bg);
+    color: var(--abc-text);
+}
+
+h1, h2, h3, h4, h5 {
+    color: #fff;
+    letter-spacing: .2px;
+}
+
+/* ---- links ---- */
+a {
+    color: #93c5fd;
+}
+
+    a:hover {
+        color: #bfdbfe;
+    }
+
+/* ---- navbar ---- */
+.navbar,
+.navbar-dark,
+.navbar .navbar-nav .nav-link {
+    background-color: var(--abc-panel) !important;
+    color: var(--abc-text) !important;
+}
+
+    .navbar .nav-link:hover {
+        color: #fff !important;
+    }
+
+/* =========================================================
+   Home tiles (quick actions)
+   If your buttons already use .w-100.p-3 this will target them.
+   You can also add class="btn-tile" to be explicit.
+   ========================================================= */
+.row .btn.w-100.p-3,
+.btn-tile {
+    border: 0;
+    border-radius: 14px;
+    box-shadow: var(--abc-shadow);
+    color: #fff !important;
+    transform: translateY(0);
+    transition: transform .18s ease, box-shadow .18s ease, filter .18s ease;
+}
+
+    .row .btn.w-100.p-3:hover,
+    .btn-tile:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 14px 28px rgba(0,0,0,.22);
+        filter: brightness(1.05);
+    }
+    /* per-tile gradients */
+    a.btn.btn-primary.w-100.p-3,
+    .btn-tile.btn-primary {
+        background: linear-gradient(135deg, var(--abc-tile-customers), #60a5fa);
+    }
+
+    a.btn.btn-success.w-100.p-3,
+    .btn-tile.btn-success {
+        background: linear-gradient(135deg, var(--abc-tile-products), #34d399);
+    }
+
+    a.btn.btn-warning.w-100.p-3,
+    .btn-tile.btn-warning {
+        background: linear-gradient(135deg, var(--abc-tile-orders), #fbbf24);
+        color: #1f2937 !important;
+    }
+
+    a.btn.btn-info.w-100.p-3,
+    .btn-tile.btn-info {
+        background: linear-gradient(135deg, var(--abc-tile-upload), #22d3ee);
+    }
+
+/* =========================================================
+   Cards (Featured Products)
+   ========================================================= */
+.card {
+    background: #0b132a;
+    border: 0;
+    border-radius: 16px;
+    box-shadow: var(--abc-shadow);
+    overflow: hidden;
+    transition: transform .2s ease, box-shadow .2s ease;
+}
+
+    .card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 16px 32px rgba(0,0,0,.24);
+    }
+
+.card-img-top {
+    height: 180px;
+    object-fit: cover;
+}
+
+.card-title {
+    color: #fff;
+    font-weight: 600;
+}
+
+.card-text {
+    color: var(--abc-muted);
+}
+
+.card .fw-bold {
+    color: #fff;
+}
+
+    /* price chip accent */
+    .card .fw-bold::before {
+        content: "";
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        margin-right: 6px;
+        background: #10b981; /* emerald dot */
+    }
+
+/* =========================================================
+   Tables (dark friendly)
+   ========================================================= */
+.table {
+    color: var(--abc-text);
+    --bs-table-bg: transparent;
+    --bs-table-striped-bg: rgba(255,255,255,.06);
+    --bs-table-striped-color: var(--abc-text);
+    --bs-table-hover-bg: rgba(255,255,255,.08);
+    --bs-table-hover-color: var(--abc-text);
+}
+
+    .table thead th {
+        color: #e5e7eb;
+        border-bottom-color: rgba(255,255,255,.15);
+    }
+
+/* =========================================================
+   Badges (Order status)
+   Use Bootstrap .badge classes in views.
+   ========================================================= */
+.badge {
+    border-radius: 999px;
+    padding: .45rem .7rem;
+    font-weight: 600;
+}
+
+.badge-success {
+    background: #16a34a;
+}
+
+.badge-warning {
+    background: #f59e0b;
+    color: #1f2937;
+}
+
+.badge-secondary {
+    background: #6b7280;
+}
+
+.badge-danger {
+    background: #ef4444;
+}
+
+/* =========================================================
+   Alerts (TempData messages)
+   ========================================================= */
+.alert {
+    border: 0;
+    border-radius: 12px;
+    box-shadow: var(--abc-shadow);
+}
+
+/* =========================================================
+   Forms
+   ========================================================= */
+.form-control,
+.form-select {
+    background: #0b132a;
+    color: var(--abc-text);
+    border: 1px solid rgba(255,255,255,.12);
+}
+
+    .form-control::placeholder {
+        color: #9aa4b2;
+    }
+
+    .form-control:focus,
+    .form-select:focus {
+        background: #0b132a;
+        color: var(--abc-text);
+        border-color: #60a5fa;
+    }
+
+/* =========================================================
+   Footer
+   ========================================================= */
+footer, .footer {
+    color: var(--abc-muted);
+}

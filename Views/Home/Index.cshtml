@@ -1,0 +1,57 @@
+﻿@model ABCRetail.Models.HomeViewModel
+@{
+    ViewData["Title"] = "Home";
+}
+
+<div class="mb-5">
+    <h1 class="mb-2">Welcome</h1>
+    <p class="text-muted">This is the ABC Retail demo home page.</p>
+</div>
+
+<div class="d-flex flex-wrap gap-3 mb-4">
+    <a class="btn btn-outline-success" asp-controller="Customer" asp-action="Index">View Customers</a>
+    <a class="btn btn-outline-primary" asp-controller="Product" asp-action="Index">View Products</a>
+    <a class="btn btn-outline-warning" asp-controller="Order" asp-action="Index">View Orders</a>
+    <a class="btn btn-outline-info" asp-controller="Upload" asp-action="Index">Upload POP</a>
+</div>
+
+<div class="d-flex flex-wrap gap-3 mb-5">
+    <span class="badge bg-secondary">Customers: @Model.CustomersCount</span>
+    <span class="badge bg-secondary">Products: @Model.ProductsCount</span>
+    <span class="badge bg-secondary">Orders: @Model.OrdersCount</span>
+</div>
+
+<h2 class="mb-3">★ Featured Products</h2>
+
+@if (Model.FeaturedProducts == null || !Model.FeaturedProducts.Any())
+{
+    <div class="text-muted">No featured products available.</div>
+}
+else
+{
+    <div class="row g-4">
+        @foreach (var p in Model.FeaturedProducts)
+        {
+            <div class="col-12 col-md-6 col-lg-3">
+                <div class="card h-100 bg-dark text-light border-0">
+                    <div class="ratio ratio-16x9 bg-secondary">
+                        <img src="@(string.IsNullOrWhiteSpace(p.ImageUrl) ? "/images/placeholder.png" : p.ImageUrl)"
+                             alt="@p.Name"
+                             class="card-img-top object-fit-cover" />
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title mb-1">@p.Name</h5>
+                        <div class="small text-muted mb-3">@p.Price.ToString("C")</div>
+                        <a class="btn btn-outline-light"
+                           asp-controller="Product"
+                           asp-action="Details"
+                           asp-route-partitionKey="@p.PartitionKey"
+                           asp-route-rowKey="@p.RowKey">
+                            Details
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
